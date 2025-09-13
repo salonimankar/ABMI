@@ -1,0 +1,37 @@
+{
+  "auth": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot your password?",
+    "resetPassword": "Reset your password",
+    "createAccount": "Create your account",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "sendResetLink": "Send Reset Link",
+    "backToSignIn": "Back to sign in",
+    "resetInstructions": "Password reset instructions have been sent to your email."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "interview": "Live Interview",
+    "analysis": "Analysis",
+    "recordings": "Past Recordings",
+    "profile": "Profile",
+    "settings": "Settings",
+    "videoBot": "Video Bot",
+    "customModes": "Custom Modes"
+  }
+} 

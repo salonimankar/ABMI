@@ -1,0 +1,45 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "aiInterview": "AI Interview",
+    "analysis": "Analysis",
+    "customModes": "Custom Modes",
+    "recordings": "Recordings",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "interview": {
+    "start": "Start Interview",
+    "end": "End Session",
+    "nextQuestion": "Next Question",
+    "recording": "Recording",
+    "metrics": {
+      "confidence": "Confidence",
+      "clarity": "Clarity",
+      "eyeContact": "Eye Contact",
+      "engagement": "Engagement",
+      "speechRate": "Speech Rate",
+      "responseQuality": "Response Quality",
+      "answerStructure": "Answer Structure"
+    }
+  },
+  "settings": {
+    "profile": "Profile Settings",
+    "notifications": "Notification Settings",
+    "security": "Security",
+    "preferences": "Preferences",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "language": {
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French",
+      "de": "German",
+      "ja": "Japanese",
+      "ko": "Korean",
+      "zh": "Chinese"
+    }
+  }
+}

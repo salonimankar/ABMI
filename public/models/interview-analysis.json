@@ -1,0 +1,78 @@
+{
+  "format": "layers-model",
+  "generatedBy": "TensorFlow.js v4.15.0",
+  "convertedBy": "TensorFlow.js Converter v4.15.0",
+  "modelTopology": {
+    "class_name": "Sequential",
+    "config": {
+      "name": "interview_analysis",
+      "layers": [
+        {
+          "class_name": "Dense",
+          "config": {
+            "units": 64,
+            "activation": "relu",
+            "use_bias": true,
+            "name": "dense_1",
+            "batch_input_shape": [null, 768]
+          }
+        },
+        {
+          "class_name": "Dense",
+          "config": {
+            "units": 32,
+            "activation": "relu",
+            "use_bias": true,
+            "name": "dense_2"
+          }
+        },
+        {
+          "class_name": "Dense",
+          "config": {
+            "units": 3,
+            "activation": "sigmoid",
+            "use_bias": true,
+            "name": "output"
+          }
+        }
+      ]
+    }
+  },
+  "weightsManifest": [
+    {
+      "paths": ["interview-analysis.weights.bin"],
+      "weights": [
+        {
+          "name": "dense_1/kernel",
+          "shape": [768, 64],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_1/bias",
+          "shape": [64],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_2/kernel",
+          "shape": [64, 32],
+          "dtype": "float32"
+        },
+        {
+          "name": "dense_2/bias",
+          "shape": [32],
+          "dtype": "float32"
+        },
+        {
+          "name": "output/kernel",
+          "shape": [32, 3],
+          "dtype": "float32"
+        },
+        {
+          "name": "output/bias",
+          "shape": [3],
+          "dtype": "float32"
+        }
+      ]
+    }
+  ]
+}

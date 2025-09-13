@@ -1,0 +1,45 @@
+{
+  "navigation": {
+    "dashboard": "Panel de Control",
+    "aiInterview": "Entrevista IA",
+    "analysis": "Análisis",
+    "customModes": "Modos Personalizados",
+    "recordings": "Grabaciones",
+    "settings": "Configuración",
+    "logout": "Cerrar Sesión"
+  },
+  "interview": {
+    "start": "Iniciar Entrevista",
+    "end": "Finalizar Sesión",
+    "nextQuestion": "Siguiente Pregunta",
+    "recording": "Grabando",
+    "metrics": {
+      "confidence": "Confianza",
+      "clarity": "Claridad",
+      "eyeContact": "Contacto Visual",
+      "engagement": "Participación",
+      "speechRate": "Velocidad del Habla",
+      "responseQuality": "Calidad de Respuesta",
+      "answerStructure": "Estructura de Respuesta"
+    }
+  },
+  "settings": {
+    "profile": "Configuración de Perfil",
+    "notifications": "Configuración de Notificaciones",
+    "security": "Seguridad",
+    "preferences": "Preferencias",
+    "theme": {
+      "light": "Claro",
+      "dark": "Oscuro"
+    },
+    "language": {
+      "en": "Inglés",
+      "es": "Español",
+      "fr": "Francés",
+      "de": "Alemán",
+      "ja": "Japonés",
+      "ko": "Coreano",
+      "zh": "Chino"
+    }
+  }
+}
