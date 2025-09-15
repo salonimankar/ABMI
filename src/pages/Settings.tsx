@@ -79,8 +79,8 @@ function Settings() {
       performanceReports: true,
     },
     preferences: {
-      theme: 'light' as const,
-      language: 'en' as const,
+      theme: 'light' as 'light' | 'dark',
+      language: 'en' as 'en',
       soundEffects: true,
     },
     emailNotifications: true,

@@ -22,8 +22,8 @@ export default function Logo() {
           </svg>
         </div>
       </div>
-      <h1 className="ml-4 text-3xl font-bold text-gray-900">
-        <span className="text-indigo-600">AI</span>MITM
+      <h1 className="ml-4 text-3xl font-bold text-gray-100">
+        <span className="text-indigo-400">AI</span> Interview Training System
       </h1>
     </div>
   );

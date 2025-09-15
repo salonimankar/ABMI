@@ -16,11 +16,6 @@ export default defineConfig({
     ],
     exclude: ['@tensorflow/tfjs-backend-webgpu']
   },
-  build: {
-    rollupOptions: {
-      external: ['@tensorflow/tfjs-backend-webgpu']
-    }
-  },
   envDir: '.',
   server: {
     watch: {
@@ -28,8 +23,8 @@ export default defineConfig({
       interval: 100
     },
     host: true,
-    port: 5173,
-    strictPort: true,
+    port: 5174,
+    strictPort: false,
     hmr: {
       timeout: 5000
     }
@@ -42,7 +37,7 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
-    minify: 'terser',
+    minify: 'esbuild',
     rollupOptions: {
       external: ['@tensorflow/tfjs-backend-webgpu'],
       output: {

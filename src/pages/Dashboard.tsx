@@ -138,10 +138,10 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-white">
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-gray-100">
         <div className="animate-fade-in">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Welcome back, {user?.email?.split('@')[0]}</h1>
+          <h1 className="text-3xl font-bold text-gray-100 mb-8">Welcome back, {user?.email?.split('@')[0]}</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             {statsItems.map((item) => (
@@ -149,7 +149,7 @@ export default function Dashboard() {
                 key={item.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]"
+                className="bg-gray-900/60 border border-gray-700 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]"
               >
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
@@ -160,11 +160,11 @@ export default function Dashboard() {
                   </div>
                   <div className="ml-5 w-0 flex-1">
                     <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">
+                      <dt className="text-sm font-medium text-gray-300 truncate">
                         {item.name}
                       </dt>
                       <dd>
-                        <div className="text-lg font-medium text-gray-900">
+                        <div className="text-lg font-medium text-gray-100">
                           {item.value}
                         </div>
                       </dd>
@@ -176,8 +176,8 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+            <div className="bg-gray-900/60 border border-gray-700 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]">
+              <h2 className="text-xl font-bold text-gray-100 mb-4">Quick Actions</h2>
               <div className="space-y-4">
                 <button
                   onClick={handleStartInterview}
@@ -187,28 +187,28 @@ export default function Dashboard() {
                 </button>
                 <button
                   onClick={handleViewAnalysis}
-                  className="w-full bg-white text-indigo-600 py-3 px-4 rounded-md border border-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-[1.02]"
+                  className="w-full bg-transparent text-indigo-400 py-3 px-4 rounded-md border border-indigo-600 hover:bg-indigo-950/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-[1.02]"
                 >
                   View Analysis
                 </button>
                 <button
                   onClick={handleViewRecordings}
-                  className="w-full bg-white text-indigo-600 py-3 px-4 rounded-md border border-indigo-600 hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-[1.02]"
+                  className="w-full bg-transparent text-indigo-400 py-3 px-4 rounded-md border border-indigo-600 hover:bg-indigo-950/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform hover:scale-[1.02]"
                 >
                   View Recordings
                 </button>
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Weekly Progress</h2>
+            <div className="bg-gray-900/60 border border-gray-700 p-6 rounded-2xl shadow-xl transform transition-all duration-300 hover:scale-[1.02]">
+              <h2 className="text-xl font-bold text-gray-100 mb-4">Weekly Progress</h2>
               <div className="h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={sampleWeeklyProgress}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                    <XAxis dataKey="date" stroke="#9CA3AF" />
+                    <YAxis stroke="#9CA3AF" />
+                    <Tooltip contentStyle={{ backgroundColor: '#111827', borderColor: '#374151', color: '#E5E7EB' }} />
                     <Area
                       type="monotone"
                       dataKey="score"
