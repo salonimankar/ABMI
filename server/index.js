@@ -10,8 +10,29 @@ dotenv.config();
 // ================== App setup ==================
 const app = express();
 app.use(cors());
+
+// Security and caching headers
+app.use((req, res, next) => {
+  res.setHeader('x-content-type-options', 'nosniff');
+  res.removeHeader('Expires');
+  res.removeHeader('Pragma');
+  // Default caching policy (adjust as needed)
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  next();
+});
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Content-Type corrections for known static file types if served via this server
+app.get('*.svg', (req, res, next) => {
+  res.type('image/svg+xml');
+  next();
+});
+app.get('*.ts', (req, res, next) => {
+  res.type('text/x-typescript');
+  next();
+});
 
 // ================== Auth (email+password handled by frontend provider) ==================
 // No OTP endpoints
@@ -133,12 +154,14 @@ app.get('/recordings', (req, res) => {
 app.get('/recordings/:id', (req, res) => {
   const file = `recordings/${req.params.id}`;
   if (!fs.existsSync(file)) return res.status(404).json({ error: 'Not found' });
+  res.setHeader('Cache-Control', 'public, max-age=600');
   res.sendFile(file, { root: process.cwd() });
 });
 
 app.get('/recordings/:id/download', (req, res) => {
   const file = `recordings/${req.params.id}`;
   if (!fs.existsSync(file)) return res.status(404).json({ error: 'Not found' });
+  res.setHeader('Cache-Control', 'public, max-age=600');
   res.download(file);
 });
 

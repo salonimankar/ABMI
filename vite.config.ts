@@ -27,12 +27,20 @@ export default defineConfig({
     strictPort: false,
     hmr: {
       timeout: 5000
+    },
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'X-Content-Type-Options': 'nosniff'
     }
   },
   preview: {
     port: 4173,
     host: true,
-    strictPort: true
+    strictPort: true,
+    headers: {
+      'Cache-Control': 'public, max-age=600',
+      'X-Content-Type-Options': 'nosniff'
+    }
   },
   build: {
     outDir: 'dist',

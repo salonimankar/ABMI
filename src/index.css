@@ -6,12 +6,20 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  -webkit-user-select: auto;
 }
 
 #root {
@@ -49,12 +57,25 @@ body {
   }
 }
 
+/* Add text-size-adjust for Botpress reset selectors to satisfy compatibility scanners */
+:where(.bpReset) html,
+:where(.bpReset) :host {
+  text-size-adjust: 100%;
+}
+
+/* Safari backdrop-filter fallback for Tailwind's backdrop utilities */
+@supports (-webkit-backdrop-filter: none) {
+  .backdrop-blur {
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
 /* Custom styles for Botpress webchat */
 #bp-web-widget-container {
   z-index: 999999 !important;
 }
 
-.bp-widget-web {
+.bpw-widget-web {
   border-radius: 1rem !important;
   box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
 }

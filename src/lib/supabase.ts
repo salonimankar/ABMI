@@ -7,6 +7,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-k
 
 // Check if we have real environment variables
 const hasValidConfig = supabaseUrl !== 'https://placeholder.supabase.co' && supabaseAnonKey !== 'placeholder-key';
+export const supabaseConfigured = hasValidConfig;
 
 if (!hasValidConfig) {
   console.warn('⚠️ Supabase environment variables not configured. Using placeholder values.');

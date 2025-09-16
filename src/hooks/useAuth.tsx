@@ -34,6 +34,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Safety timeout in case Supabase network hangs
+    const loadingSafeguard = setTimeout(() => {
+      if (loading) {
+        console.warn('Auth loading timed out, proceeding without session');
+        setLoading(false);
+      }
+    }, 5000);
+
     // Check if Supabase is properly configured
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -42,6 +50,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       console.warn('Supabase not configured, using mock authentication');
       setUser(null);
       setLoading(false);
+      clearTimeout(loadingSafeguard);
       return;
     }
 
@@ -49,10 +58,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setLoading(false);
+      clearTimeout(loadingSafeguard);
     }).catch((error) => {
       console.error('Error getting session:', error);
       setUser(null);
       setLoading(false);
+      clearTimeout(loadingSafeguard);
     });
 
     // Listen for changes on auth state (sign in, sign out, etc.)
@@ -61,7 +72,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(loadingSafeguard);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signIn = async (email: string, password: string) => {
@@ -94,8 +108,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw error;
     }
     if (!data?.user?.email_confirmed_at) {
-      // If project does not allow sign-in without confirmed email, this will typically error above.
-      // Handle projects that allow it but we want to enforce verification on the client.
       await supabase.auth.signOut();
       throw new Error('Please verify your email before signing in.');
     }
