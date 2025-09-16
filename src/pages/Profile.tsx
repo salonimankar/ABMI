@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import { supabase } from '../lib/supabase';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import {
@@ -43,7 +43,19 @@ export default function Profile() {
   }, [user]);
 
   const loadProfile = async () => {
-    if (!user) return;
+    if (!user || !supabaseConfigured) {
+      // Mock data fallback
+      setFormData({
+        name: 'John Doe',
+        email: user?.email || 'user@example.com',
+        bio: 'Aspiring software engineer passionate about building delightful products.',
+        skills: ['React', 'TypeScript', 'Node.js'],
+        github_profile: 'https://github.com/username',
+        linkedin_profile: 'https://linkedin.com/in/username',
+      });
+      setLoading(false);
+      return;
+    }
 
     try {
       setLoading(true);
@@ -58,12 +70,12 @@ export default function Profile() {
       if (profileError) throw profileError;
 
       setFormData({
-        name: profile.name || '',
-        email: profile.email || '',
-        bio: profile.bio || '',
-        skills: profile.skills || [],
-        github_profile: profile.github_profile || '',
-        linkedin_profile: profile.linkedin_profile || '',
+        name: (profile as any).name || '',
+        email: (profile as any).email || user.email || '',
+        bio: (profile as any).bio || '',
+        skills: (profile as any).skills || [],
+        github_profile: (profile as any).github_profile || '',
+        linkedin_profile: (profile as any).linkedin_profile || '',
       });
     } catch (err) {
       console.error('Error loading profile:', err);
@@ -76,7 +88,10 @@ export default function Profile() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
+    if (!user || !supabaseConfigured) {
+      toast.success('Profile saved (mock)');
+      return;
+    }
 
     try {
       setSaving(true);
@@ -91,7 +106,7 @@ export default function Profile() {
           github_profile: formData.github_profile,
           linkedin_profile: formData.linkedin_profile,
           updated_at: new Date().toISOString(),
-        })
+        } as any)
         .eq('id', user.id);
 
       if (updateError) throw updateError;

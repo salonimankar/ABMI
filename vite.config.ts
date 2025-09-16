@@ -16,11 +16,6 @@ export default defineConfig({
     ],
     exclude: ['@tensorflow/tfjs-backend-webgpu']
   },
-  build: {
-    rollupOptions: {
-      external: ['@tensorflow/tfjs-backend-webgpu']
-    }
-  },
   envDir: '.',
   server: {
     watch: {
@@ -28,21 +23,29 @@ export default defineConfig({
       interval: 100
     },
     host: true,
-    port: 5173,
-    strictPort: true,
+    port: 5174,
+    strictPort: false,
     hmr: {
       timeout: 5000
+    },
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'X-Content-Type-Options': 'nosniff'
     }
   },
   preview: {
     port: 4173,
     host: true,
-    strictPort: true
+    strictPort: true,
+    headers: {
+      'Cache-Control': 'public, max-age=600',
+      'X-Content-Type-Options': 'nosniff'
+    }
   },
   build: {
     outDir: 'dist',
     sourcemap: true,
-    minify: 'terser',
+    minify: 'esbuild',
     rollupOptions: {
       external: ['@tensorflow/tfjs-backend-webgpu'],
       output: {

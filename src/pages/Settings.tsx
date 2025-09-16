@@ -17,7 +17,7 @@ import {
   QrCode,
   Key,
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -79,8 +79,8 @@ function Settings() {
       performanceReports: true,
     },
     preferences: {
-      theme: 'light' as const,
-      language: 'en' as const,
+      theme: 'light' as 'light' | 'dark',
+      language: 'en' as 'en',
       soundEffects: true,
     },
     emailNotifications: true,
@@ -96,14 +96,31 @@ function Settings() {
   }, [user]);
 
   const loadSettings = async () => {
-    if (!user) return;
+    if (!user || !supabaseConfigured) {
+      setSettings((prev) => ({
+        ...prev,
+        profile: {
+          fullName: 'John Doe',
+          email: user?.email || 'user@example.com',
+          bio: 'This is a mock bio. Supabase is not configured.',
+        },
+        preferences: {
+          theme: 'light',
+          language: 'en',
+          soundEffects: true,
+        },
+      }));
+      document.documentElement.classList.toggle('dark', false);
+      setLoading(false);
+      return;
+    }
 
     try {
       setLoading(true);
       setError(null);
 
       // Load profile data
-      const { data: profile, error: profileError } = await supabase
+      const { data: profile, error: profileError } = await (supabase as any)
         .from('profiles')
         .select('*')
         .eq('id', user.id)
@@ -112,7 +129,7 @@ function Settings() {
       if (profileError) throw profileError;
 
       // Load settings data
-      const { data: userSettings, error: settingsError } = await supabase
+      const { data: userSettings, error: settingsError } = await (supabase as any)
         .from('settings')
         .select('*')
         .eq('user_id', user.id)
@@ -126,30 +143,30 @@ function Settings() {
 
       setSettings({
         profile: {
-          fullName: profile?.full_name || '',
-          email: profile?.email || '',
-          bio: profile?.bio || '',
+          fullName: (profile as any)?.full_name || '',
+          email: (profile as any)?.email || '',
+          bio: (profile as any)?.bio || '',
         },
-        notifications: userSettings?.notification_preferences || {
+        notifications: (userSettings as any)?.notification_preferences || {
           email: true,
           interviewReminders: true,
           performanceReports: true,
         },
         preferences: {
-          theme: (userSettings?.theme as 'light' | 'dark') || 'light',
-          language: (userSettings?.language as 'en') || 'en',
+          theme: ((userSettings as any)?.theme as 'light' | 'dark') || 'light',
+          language: ((userSettings as any)?.language as 'en') || 'en',
           soundEffects: true,
         },
-        emailNotifications: userSettings?.notification_preferences?.email || true,
-        interviewReminders: userSettings?.notification_preferences?.interviewReminders || true,
-        weeklyReports: userSettings?.notification_preferences?.performanceReports || true,
-        darkMode: userSettings?.theme === 'dark',
+        emailNotifications: (userSettings as any)?.notification_preferences?.email || true,
+        interviewReminders: (userSettings as any)?.notification_preferences?.interviewReminders || true,
+        weeklyReports: (userSettings as any)?.notification_preferences?.performanceReports || true,
+        darkMode: (userSettings as any)?.theme === 'dark',
         autoSave: true,
       });
 
       document.documentElement.classList.toggle(
         'dark',
-        userSettings?.theme === 'dark'
+        (userSettings as any)?.theme === 'dark'
       );
     } catch (err) {
       console.error('Error loading settings:', err);
@@ -162,13 +179,16 @@ function Settings() {
 
   const loadSecurityInfo = async () => {
     try {
-      // Load connected devices
+      if (!user) return;
       const devices = await getConnectedDevices();
       setConnectedDevices(devices);
 
-      // Check 2FA status
-      const { data: mfaData } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
-      setTwoFactorEnabled(mfaData.currentLevel === 'aal2');
+      if (supabaseConfigured) {
+        const { data: mfaData } = await (supabase as any).auth.mfa.getAuthenticatorAssuranceLevel();
+        setTwoFactorEnabled(mfaData.currentLevel === 'aal2');
+      } else {
+        setTwoFactorEnabled(false);
+      }
     } catch (err) {
       console.error('Error loading security info:', err);
       toast.error('Failed to load security information');
