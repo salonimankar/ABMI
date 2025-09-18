@@ -386,11 +386,11 @@ function Settings() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 text-gray-100">
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-3xl font-bold text-white">Settings</h1>
+          <p className="text-gray-300 mt-2">
             Manage your account settings and preferences
           </p>
         </div>
@@ -407,14 +407,14 @@ function Settings() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Profile Settings */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <User className="h-5 w-5" />
             Profile Settings
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Full Name</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Full Name</label>
               <input
                 type="text"
                 value={settings.profile.fullName}
@@ -424,21 +424,21 @@ function Settings() {
                     profile: { ...settings.profile, fullName: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 placeholder="John Doe"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Email</label>
               <input
                 type="email"
                 value={settings.profile.email}
                 disabled
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent opacity-50"
+                className="w-full px-4 py-2 rounded-lg bg-gray-900/60 border border-gray-700 text-gray-400 opacity-70"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Bio</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Bio</label>
               <textarea
                 value={settings.profile.bio}
                 onChange={(e) =>
@@ -447,7 +447,7 @@ function Settings() {
                     profile: { ...settings.profile, bio: e.target.value },
                   })
                 }
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 rows={3}
                 placeholder="Tell us about yourself..."
               />
@@ -456,7 +456,7 @@ function Settings() {
         </div>
 
         {/* Notification Settings */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Bell className="h-5 w-5" />
             Notification Settings
@@ -467,7 +467,7 @@ function Settings() {
                 key={key}
                 className="flex items-center justify-between"
               >
-                <span>{key.replace(/([A-Z])/g, ' $1').trim()}</span>
+                <span className="text-gray-200">{key.replace(/([A-Z])/g, ' $1').trim()}</span>
                 <button
                   onClick={() =>
                     setSettings({
@@ -479,7 +479,7 @@ function Settings() {
                     })
                   }
                   className={`w-11 h-6 rounded-full relative ${
-                    value ? 'bg-primary' : 'bg-accent'
+                    value ? 'bg-indigo-600' : 'bg-gray-700'
                   }`}
                 >
                   <div
@@ -494,7 +494,7 @@ function Settings() {
         </div>
 
         {/* Security */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Shield className="h-5 w-5" />
             Security
@@ -502,14 +502,14 @@ function Settings() {
           <div className="space-y-4">
             <button 
               onClick={() => setShowPasswordModal(true)}
-              className="w-full px-4 py-2 text-left bg-background rounded-lg hover:bg-accent transition-colors flex items-center justify-between"
+              className="w-full px-4 py-2 text-left bg-gray-900/60 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between"
             >
               <span>Change Password</span>
               <Key className="h-4 w-4" />
             </button>
             <button 
               onClick={() => twoFactorEnabled ? handleDisable2FA() : handle2FASetup()}
-              className="w-full px-4 py-2 text-left bg-background rounded-lg hover:bg-accent transition-colors flex items-center justify-between"
+              className="w-full px-4 py-2 text-left bg-gray-900/60 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between"
             >
               <span>Two-Factor Authentication</span>
               <div className="flex items-center gap-2">
@@ -521,7 +521,7 @@ function Settings() {
             </button>
             <button 
               onClick={() => setShowDevicesModal(true)}
-              className="w-full px-4 py-2 text-left bg-background rounded-lg hover:bg-accent transition-colors flex items-center justify-between"
+              className="w-full px-4 py-2 text-left bg-gray-900/60 border border-gray-700 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-between"
             >
               <span>Connected Devices</span>
               <Monitor className="h-4 w-4" />
@@ -530,7 +530,7 @@ function Settings() {
         </div>
 
         {/* Preferences */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Monitor className="h-5 w-5" />
             Preferences
@@ -550,7 +550,7 @@ function Settings() {
                 onChange={(e) =>
                   handleThemeChange(e.target.value as 'light' | 'dark')
                 }
-                className="bg-background border border-accent rounded-lg px-3 py-1"
+                className="bg-gray-950/70 border border-gray-700 text-gray-100 rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-600"
               >
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>

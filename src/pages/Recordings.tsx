@@ -110,10 +110,10 @@ function Recordings() {
     <div className="space-y-8 text-gray-100">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Recorded Interviews</h1>
-          <p className="text-gray-400 mt-1">Play, download, delete or upload new recordings</p>
+          <h1 className="text-3xl font-bold text-white">Recorded Interviews</h1>
+          <p className="text-gray-300 mt-1">Play, download, delete or upload new recordings</p>
         </div>
-        <label className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-indigo-600 text-white cursor-pointer">
+        <label className="inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-indigo-600 text-white cursor-pointer shadow hover:bg-indigo-500">
           <Upload className="h-4 w-4" />
           <span>{uploading ? 'Uploading...' : 'Upload recording'}</span>
           <input type="file" accept="video/*,audio/*" onChange={handleUpload} className="hidden" disabled={uploading} />
@@ -126,7 +126,7 @@ function Recordings() {
           placeholder="Search recordings..."
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="flex-1 px-4 py-2 rounded-lg bg-gray-900/60 border border-gray-700 text-gray-100 placeholder-gray-400"
+          className="flex-1 px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600"
         />
       </div>
 
@@ -138,26 +138,26 @@ function Recordings() {
             const isActive = activePlayerId === rec.id;
             const isVideo = rec.name.match(/\.(webm|mp4|mov|mkv)$/i);
             return (
-              <div key={rec.id} className="bg-gray-950/60 border border-gray-800 rounded-xl p-4">
+              <div key={rec.id} className="bg-gray-950/80 border border-gray-800 rounded-xl p-4 hover:border-indigo-700 transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-indigo-600/20 flex items-center justify-center">
-                      <Play className="h-5 w-5 text-indigo-400" />
+                    <div className="h-10 w-10 rounded-full bg-indigo-600/30 flex items-center justify-center ring-1 ring-indigo-700/40">
+                      <Play className="h-5 w-5 text-indigo-300" />
                     </div>
                     <div>
-                      <p className="font-medium">{rec.name}</p>
-                      <p className="text-xs text-gray-400">{new Date(String(rec.created_at)).toLocaleString()}</p>
+                      <p className="font-medium text-white">{rec.name}</p>
+                      <p className="text-xs text-gray-300">{new Date(String(rec.created_at)).toLocaleString()}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={downloadUrl} className="px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700" download>
+                    <a href={downloadUrl} className="px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-200" download>
                       <Download className="h-4 w-4" />
                     </a>
                     <button onClick={() => handleDelete(rec.id)} className="px-3 py-2 rounded-lg bg-gray-800 hover:bg-gray-700 text-red-400">
                       <Trash2 className="h-4 w-4" />
                     </button>
                     {!isActive ? (
-                      <button onClick={() => setActivePlayerId(rec.id)} className="px-3 py-2 rounded-lg bg-indigo-600 text-white">Play</button>
+                      <button onClick={() => setActivePlayerId(rec.id)} className="px-3 py-2 rounded-lg bg-indigo-600 text-white shadow hover:bg-indigo-500">Play</button>
                     ) : (
                       <button onClick={() => setActivePlayerId(null)} className="px-3 py-2 rounded-lg bg-gray-800 text-gray-200"><X className="h-4 w-4" /></button>
                     )}

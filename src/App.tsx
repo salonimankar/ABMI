@@ -9,6 +9,7 @@ import LiveInterview from './pages/LiveInterview';
 import Analysis from './pages/Analysis';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
+import Recordings from './pages/Recordings';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="interview" element={<LiveInterview />} />
             <Route path="analysis" element={<Analysis />} />
+            <Route path="recordings" element={<Recordings />} />
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>

@@ -34,6 +34,10 @@ export const supabase = createClient<AnyDatabase>(supabaseUrl, supabaseAnonKey, 
 
 // Initialize database tables
 export async function initializeDatabase() {
+  // Skip all network calls when Supabase is not configured
+  if (!hasValidConfig) {
+    return;
+  }
   try {
     // Create profiles table if it doesn't exist
     const { error: profilesError } = await supabase.rpc('create_profiles_table');
@@ -69,8 +73,10 @@ export async function initializeDatabase() {
   }
 }
 
-// Call initialization when the app starts
-initializeDatabase();
+// Call initialization when the app starts only if configured
+if (hasValidConfig) {
+  initializeDatabase();
+}
 
 // Ensure user profile exists
 export async function ensureUserProfile() {

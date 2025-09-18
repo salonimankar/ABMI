@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase';
+import { supabase, supabaseConfigured } from '../lib/supabase';
 import { Interview, Feedback } from '../lib/types';
 import { useAuth } from '../hooks/useAuth';
 import { toast } from 'sonner';
@@ -81,7 +81,7 @@ export function useAnalysis(): AnalysisData & {
   const { user } = useAuth();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !supabaseConfigured) {
       setLoading(false);
       return;
     }

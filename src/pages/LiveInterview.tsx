@@ -9,6 +9,8 @@ const LiveInterview: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
+  const [hasPermissions, setHasPermissions] = useState(false);
+  const [showAnalysis, setShowAnalysis] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -19,13 +21,19 @@ const LiveInterview: React.FC = () => {
     };
   }, [stream]);
 
-  const startRecording = async () => {
+  const ensurePermissions = async () => {
     const localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
     setStream(localStream);
+    setHasPermissions(true);
     if (videoRef.current) {
       videoRef.current.srcObject = localStream;
       await (videoRef.current as HTMLVideoElement).play().catch(() => {});
     }
+    return localStream;
+  };
+
+  const startRecording = async () => {
+    const localStream = stream ?? (await ensurePermissions());
     const mr = new MediaRecorder(localStream, { mimeType: 'video/webm;codecs=vp9,opus' });
     chunksRef.current = [];
     mr.ondataavailable = (e) => {
@@ -45,6 +53,7 @@ const LiveInterview: React.FC = () => {
     mediaRecorderRef.current = mr;
     mr.start();
     setRecording(true);
+    setShowAnalysis(true);
   };
 
   const stopRecording = () => {
@@ -64,11 +73,17 @@ const LiveInterview: React.FC = () => {
             <video ref={videoRef} className="w-full h-full object-cover" muted playsInline />
           </div>
           <div className="mt-4 flex gap-3">
+            {!hasPermissions && (
+              <button onClick={ensurePermissions} className="px-4 py-2 rounded-lg bg-indigo-600 text-white">Allow Camera & Mic</button>
+            )}
             {!recording ? (
-              <button onClick={startRecording} className="px-4 py-2 rounded-lg bg-emerald-600 text-white">Start Recording</button>
+              <button onClick={startRecording} disabled={!hasPermissions} className={`px-4 py-2 rounded-lg text-white ${hasPermissions ? 'bg-emerald-600' : 'bg-emerald-600/50 cursor-not-allowed'}`}>Start Recording</button>
             ) : (
               <button onClick={stopRecording} className="px-4 py-2 rounded-lg bg-red-600 text-white">Stop & Save</button>
             )}
+            <button onClick={() => setShowAnalysis((v) => !v)} disabled={!hasPermissions} className={`px-4 py-2 rounded-lg ${showAnalysis ? 'bg-purple-700 text-white' : 'bg-gray-800 text-gray-200'} ${!hasPermissions ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              {showAnalysis ? 'Hide Analysis' : 'Start Analysis'}
+            </button>
             {saving && <span className="text-gray-300">Uploading...</span>}
           </div>
           <div className="mt-4">
@@ -93,7 +108,11 @@ const LiveInterview: React.FC = () => {
         </div>
         <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-4">
           <h2 className="text-xl font-semibold mb-3">Real-time Analysis</h2>
-          <InterviewAnalysis />
+          {showAnalysis ? (
+            <InterviewAnalysis />
+          ) : (
+            <p className="text-gray-300 text-sm">Click <span className="font-semibold">Start Analysis</span> to view live metrics.</p>
+          )}
         </div>
       </div>
     </div>

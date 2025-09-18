@@ -162,11 +162,11 @@ export default function Profile() {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 text-gray-100">
       <div className="flex justify-between items-start">
         <div>
-          <h1 className="text-3xl font-bold">Profile</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-3xl font-bold text-white">Profile</h1>
+          <p className="text-gray-300 mt-2">
             Manage your personal information and professional details
           </p>
         </div>
@@ -183,40 +183,40 @@ export default function Profile() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Personal Information */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <User className="h-5 w-5" />
             Personal Information
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Full Name</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Full Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 placeholder="John Doe"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 disabled
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent opacity-50"
+                className="w-full px-4 py-2 rounded-lg bg-gray-900/60 border border-gray-700 text-gray-400 opacity-70"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Bio</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Bio</label>
               <textarea
                 name="bio"
                 value={formData.bio}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 rows={3}
                 placeholder="Tell us about yourself..."
               />
@@ -225,44 +225,44 @@ export default function Profile() {
         </div>
 
         {/* Professional Details */}
-        <div className="bg-secondary rounded-2xl p-6">
+        <div className="bg-gray-900/60 border border-gray-700 rounded-2xl p-6">
           <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
             <Briefcase className="h-5 w-5" />
             Professional Details
           </h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Skills</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">Skills</label>
               <input
                 type="text"
                 value={formData.skills.join(', ')}
                 onChange={handleSkillsChange}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 placeholder="React, TypeScript, Node.js"
               />
-              <p className="text-sm text-muted-foreground mt-1">
+              <p className="text-sm text-gray-400 mt-1">
                 Separate skills with commas
               </p>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">GitHub Profile</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">GitHub Profile</label>
               <input
                 type="url"
                 name="github_profile"
                 value={formData.github_profile}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 placeholder="https://github.com/username"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">LinkedIn Profile</label>
+              <label className="block text-sm font-medium mb-1 text-gray-300">LinkedIn Profile</label>
               <input
                 type="url"
                 name="linkedin_profile"
                 value={formData.linkedin_profile}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-lg bg-background border border-accent"
+                className="w-full px-4 py-2 rounded-lg bg-gray-950/70 border border-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600"
                 placeholder="https://linkedin.com/in/username"
               />
             </div>

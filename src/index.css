@@ -57,11 +57,7 @@ body {
   }
 }
 
-/* Add text-size-adjust for Botpress reset selectors to satisfy compatibility scanners */
-:where(.bpReset) html,
-:where(.bpReset) :host {
-  text-size-adjust: 100%;
-}
+/* Removed forced text-size-adjust override */
 
 /* Safari backdrop-filter fallback for Tailwind's backdrop utilities */
 @supports (-webkit-backdrop-filter: none) {

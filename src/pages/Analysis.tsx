@@ -9,6 +9,8 @@ import {
   Share2,
   Loader2,
   AlertCircle,
+  Eye,
+  Mic,
 } from 'lucide-react';
 import {
   AreaChart,
@@ -68,43 +70,59 @@ function Analysis() {
   } = useAnalysis();
 
   const [data] = useState<AnalysisData>({
-    overallScore: 85,
+    overallScore: 87,
     metrics: {
-      confidence: 80,
-      clarity: 90,
-      engagement: 75,
-      responseQuality: 85,
+      confidence: 82,
+      clarity: 91,
+      engagement: 78,
+      responseQuality: 88,
     },
     feedback: {
       strengths: [
-        'Clear communication',
-        'Good eye contact',
-        'Well-structured responses',
+        'Excellent technical knowledge and clear explanations',
+        'Strong eye contact and professional demeanor',
+        'Well-structured responses using STAR method',
+        'Good use of specific examples and metrics',
+        'Confident body language and posture',
       ],
       improvements: [
-        'Work on reducing filler words',
-        'Practice more concise answers',
-        'Improve technical depth',
+        'Reduce filler words (um, uh) - currently 12 per minute',
+        'Practice more concise answers (some responses too lengthy)',
+        'Improve technical depth in system design questions',
+        'Work on nervous hand gestures during complex topics',
+        'Better preparation for behavioral questions',
       ],
     },
     recentInterviews: [
       {
         id: '1',
         date: '2024-03-15',
-        score: 85,
-        duration: 45,
+        score: 87,
+        duration: 52,
       },
       {
         id: '2',
         date: '2024-03-10',
         score: 78,
-        duration: 40,
+        duration: 45,
       },
       {
         id: '3',
         date: '2024-03-05',
         score: 82,
-        duration: 50,
+        duration: 48,
+      },
+      {
+        id: '4',
+        date: '2024-02-28',
+        score: 75,
+        duration: 38,
+      },
+      {
+        id: '5',
+        date: '2024-02-20',
+        score: 80,
+        duration: 42,
       },
     ],
   });
@@ -358,6 +376,109 @@ function Analysis() {
                 <span className="text-sm">{skill.name}</span>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Suggested Content Sections */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Posture Analysis */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <ActivityIcon />
+            <h2 className="text-xl font-semibold">Posture Analysis</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Posture score: 84% (Good)</li>
+            <li>Back straightness: 88% - Excellent alignment</li>
+            <li>Head position: 76% - Slight forward lean detected</li>
+            <li>Shoulder stability: 82% - Minor fidgeting observed</li>
+            <li>Detected issues: Forward head posture during complex questions</li>
+            <li>Tips: Sit upright with relaxed shoulders, keep head level</li>
+          </ul>
+        </div>
+
+        {/* Eye Contact */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Eye className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Eye Contact</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Consistency score: 79% (Good)</li>
+            <li>Looking at camera: 76% of time</li>
+            <li>Average gaze duration: 3.2 seconds</li>
+            <li>Break frequency: 8 times per minute</li>
+            <li>Peak distraction: During technical deep-dive questions</li>
+            <li>Tip: Maintain steady gaze 70–80% of the time</li>
+          </ul>
+        </div>
+
+        {/* Facial Expression & Confidence */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Brain className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Facial Expression & Confidence</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Confidence score: 82% (Good)</li>
+            <li>Primary emotions: 65% neutral, 20% engaged, 15% nervous</li>
+            <li>Smile frequency: 12 times during interview</li>
+            <li>Microexpressions: 3 nervous twitches detected</li>
+            <li>Key moments: Confident during intro, nervous during coding</li>
+            <li>Suggestions: Add small smiles; reduce nervous microexpressions</li>
+          </ul>
+        </div>
+
+        {/* Speech & Voice Analysis */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Mic className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Speech & Voice Analysis</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Clarity score: 91% (Excellent)</li>
+            <li>Speaking rate: 145 WPM (Good pace)</li>
+            <li>Filler words: 12 "um/uh" per minute (High)</li>
+            <li>Pause frequency: 8 natural pauses</li>
+            <li>Volume consistency: 87% (Good)</li>
+            <li>Tips: Reduce filler words, modulate tone, pause naturally</li>
+          </ul>
+        </div>
+
+        {/* Content Quality */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <BarChart3 className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Content Quality</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Relevance score: 88% (Very Good)</li>
+            <li>STAR method usage: 75% of behavioral questions</li>
+            <li>Technical keywords: 23/25 mentioned (92%)</li>
+            <li>Example quality: 8/10 (Good specificity)</li>
+            <li>Answer length: 2.3 min average (Appropriate)</li>
+            <li>Suggestions: Strengthen examples and structure</li>
+          </ul>
+        </div>
+
+        {/* Overall Summary */}
+        <div className="bg-secondary rounded-2xl p-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Video className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-semibold">Overall Summary</h2>
+          </div>
+          <ul className="space-y-2 text-sm text-muted-foreground list-disc pl-5">
+            <li>Overall performance: 87% (Strong)</li>
+            <li>Top strength: Excellent technical clarity and knowledge</li>
+            <li>Main weakness: High filler word usage (12/min)</li>
+            <li>Improvement trend: +12% over last 3 interviews</li>
+            <li>Next focus: Reduce nervous habits during coding questions</li>
+            <li>Recommended practice: Mock interviews with filler word awareness</li>
+          </ul>
+          <div className="mt-4 flex gap-3">
+            <button onClick={exportPDF} className="px-3 py-2 rounded-lg bg-primary text-primary-foreground">Download PDF</button>
+            <button className="px-3 py-2 rounded-lg bg-secondary hover:bg-accent">Try Again</button>
           </div>
         </div>
       </div>
@@ -648,3 +769,8 @@ function Analysis() {
 }
 
 export default Analysis;
+
+// Local icon alias to avoid another import
+function ActivityIcon() {
+  return <BarChart3 className="h-5 w-5 text-primary" />;
+}

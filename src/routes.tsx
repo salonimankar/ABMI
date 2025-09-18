@@ -12,7 +12,6 @@ import VideoBot from './pages/VideoBot';
 import Analysis from './pages/Analysis';
 import CustomModes from './pages/CustomModes';
 import Settings from './pages/Settings';
-import Recordings from './pages/Recordings';
 import Resume from './pages/Resume';
 
 export default function AppRoutes() {
